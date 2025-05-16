@@ -2,3 +2,17 @@ python-dotenv
 python-box
 PyYAML
 ipykernel
+tavily-python
+polygon
+langchain
+langchain-core
+langchain-community
+langchain-google-genai
+langchain-huggingface
+langchain-groq
+langgraph
+streamlit
+fastapi[all]
+uvicorn
+langchain-pinecone
+pypdf
