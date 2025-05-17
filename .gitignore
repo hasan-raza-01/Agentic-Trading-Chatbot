@@ -23,18 +23,3 @@ artifacts/
 template.py
 .env
 ProjectConfig.json
-# Ignores from this projects
-
-# Folders
-.venv/
-__pycache__/
-notebook/
-logs/
-artifacts/
-
-
-# Files
-*.egg-info
-template.py
-.env
-ProjectConfig.json
