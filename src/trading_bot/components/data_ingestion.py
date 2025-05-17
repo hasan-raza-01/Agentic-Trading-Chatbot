@@ -34,7 +34,7 @@ class DataIngestionComponents:
             documents = []
             for uploaded_file in uploaded_files:
                 file_name = uploaded_file.filename
-                file_ext = os.path.splitext(uploaded_file.filename)[1].lower()
+                file_ext = os.path.splitext(file_name)[1].lower()
                 suffix = file_ext if file_ext in [".pdf", ".docx"] else ".tmp"
 
                 with tempfile.NamedTemporaryFile(delete=False, suffix=suffix) as temp_file:
@@ -108,7 +108,7 @@ class DataIngestionComponents:
             logging.exception(e)
             raise CustomException(e, sys)
         
-    def run_pipeline(self, uploaded_files) -> None:
+    def main(self, uploaded_files) -> None:
         documents = self.load_documents(uploaded_files)
         if not documents:
             logging.warning("No valid documents found.")

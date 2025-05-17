@@ -1,9 +1,11 @@
 from langchain_google_genai.embeddings import GoogleGenerativeAIEmbeddings
+from langchain_google_genai import ChatGoogleGenerativeAI
 from trading_bot.entity import EmbeddingsModel
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_pinecone import PineconeVectorStore
 from trading_bot.exception import CustomException
 from pinecone import ServerlessSpec, Pinecone
+from langchain_groq import ChatGroq
 from dotenv import load_dotenv
 from pathlib import Path
 from box import ConfigBox
@@ -106,12 +108,14 @@ def load_embeddings(google_model_name:str, huggingface_model_name:str) -> Google
         load_dotenv()
         try:
             embeddings = GoogleGenerativeAIEmbeddings(model=google_model_name)
+            embeddings.embed_query("test query")
         except:
             embeddings = HuggingFaceEmbeddings(
                 model_name = huggingface_model_name, 
                 model_kwargs = {"device": "cpu"}, 
-                encode_kwargs = {"normalize_embeddings": True}
-            )
+                encode_kwargs = {"normalize_embeddings": True})
+            embeddings.embed_query("test query")
+            
         return embeddings
     except Exception as e:
         raise CustomException(e, sys)
@@ -140,6 +144,30 @@ def get_vector_store(pinecone_api_key:str, index_name:str, embeddings:Embeddings
         index = pinecone_client.Index(index_name)
 
         return PineconeVectorStore(index=index, embedding=embeddings)
+    except Exception as e:
+        raise CustomException(e, sys)
+    
+def load_reasoner(google_model_name:str, groq_model_name:str) -> ChatGoogleGenerativeAI | ChatGroq :
+    """load reasoner model from google or groq
+
+    Args:
+        google_model_name (str): google reasoner model name
+        groq_model_name (str): groq reasoner model name
+
+    Raises:
+        CustomException: First google model will be tried to load, if any error occurs groq model  will be tried to load if any error occurs error will be raised
+
+    Returns:
+        ChatGoogleGenerativeAI | ChatGroq
+    """
+    try:
+        try:
+            llm=ChatGoogleGenerativeAI(model=google_model_name)
+            llm.invoke("hii")
+        except:
+            llm=ChatGroq(model=groq_model_name) 
+            llm.invoke("hii")
+        return llm
     except Exception as e:
         raise CustomException(e, sys)
     

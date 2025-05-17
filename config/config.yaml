@@ -10,6 +10,12 @@ MODELS:
     GOOGLE: "models/text-embedding-004"
     HUGGINGFACE: "BAAI/bge-small-en"
   REASONERS:
-    GEMINI_PRO: "gemini-2.5-pro-exp-03-25"
+    GEMINI_FLASH: "gemini-2.0-flash"
     DEEPSEEK_R1: "deepseek-r1-distill-llama-70b"
-    
+
+TOOLS:
+  RETRIEVER:
+    TOP_K: 3
+    SCORE_THRESHOLD: 0.5
+  TAVILY:
+    MAX_RESULTS: 5

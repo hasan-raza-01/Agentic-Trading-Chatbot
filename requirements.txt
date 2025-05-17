@@ -16,3 +16,4 @@ fastapi[all]
 uvicorn
 langchain-pinecone
 pypdf
+docx2txt
