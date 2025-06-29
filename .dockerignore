@@ -1,0 +1,12 @@
+# Folders
+env/
+__pycache__/
+logs/
+artifacts/
+notebook/
+
+
+# Files
+*.egg-info
+template.py
+.env

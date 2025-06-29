@@ -132,6 +132,8 @@ def get_vector_store(pinecone_api_key:str, index_name:str, embeddings:Embeddings
         PineconeVectorStore: return the vector store created
     """
     try:
+        # load api keys
+        load_dotenv()
         pinecone_client = Pinecone(api_key=pinecone_api_key)
 
         if index_name not in [i.name for i in pinecone_client.list_indexes()]:
@@ -162,6 +164,8 @@ def load_reasoner(google_model_name:str, groq_model_name:str) -> ChatGoogleGener
     """
     try:
         try:
+            # load api keys
+            load_dotenv()
             llm=ChatGoogleGenerativeAI(model=google_model_name)
             llm.invoke("hii")
         except:

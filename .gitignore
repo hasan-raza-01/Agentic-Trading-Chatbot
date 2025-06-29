@@ -11,7 +11,7 @@ wheels/
 # Ignores from this projects
 
 # Folders
-.venv/
+env/
 __pycache__/
 logs/
 artifacts/
@@ -21,4 +21,3 @@ artifacts/
 *.egg-info
 template.py
 .env
-ProjectConfig.json
