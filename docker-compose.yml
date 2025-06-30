@@ -2,6 +2,7 @@ services:
   backend:
     build:
       context: .
+      file: Dockerfile.backend
     image: tradingbot.azurecr.io/backend:latest
     ports:
       - "8000:8000"
@@ -16,7 +17,8 @@ services:
 
   ui:
     build:
-      context: ./frontend
+      context: . 
+      file: Dockerfile.streamlit
     image: tradingbot.azurecr.io/ui:latest
     ports:
       - "8501:8501"

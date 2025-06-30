@@ -26,21 +26,32 @@ jobs:
         username: ${{ secrets.AzureAppService_ContainerUsername_94b6c4c9ad9c452da4f4cf5d841de90c }}
         password: ${{ secrets.AzureAppService_ContainerPassword_149de5f9e1a34dcb994fe1da62c9b36a }}
 
-    - name: Build and push backend image to registry
+    # - name: Build and push backend image to registry
+    #   uses: docker/build-push-action@v3
+    #   with:
+    #     context: .
+    #     push: true
+    #     tags: tradingbot.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_94b6c4c9ad9c452da4f4cf5d841de90c }}/backend:${{ github.sha }}
+    #     file: Dockerfile
+
+    # - name: Build and push ui image to registry
+    #   uses: docker/build-push-action@v3
+    #   with:
+    #     context: .
+    #     push: true
+    #     tags: tradingbot.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_94b6c4c9ad9c452da4f4cf5d841de90c }}/ui:${{ github.sha }}
+    #     file: Dockerfile
+
+    - name: Build & push all services via Compose
       uses: docker/build-push-action@v3
       with:
         context: .
+        file: ./docker-compose.yml
         push: true
-        tags: tradingbot.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_94b6c4c9ad9c452da4f4cf5d841de90c }}/backend:${{ github.sha }}
-        file: Dockerfile
-
-    - name: Build and push ui image to registry
-      uses: docker/build-push-action@v3
-      with:
-        context: ./frontend
-        push: true
-        tags: tradingbot.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_94b6c4c9ad9c452da4f4cf5d841de90c }}/ui:${{ github.sha }}
-        file: Dockerfile
+        services: backend,ui
+        tags: |
+          backend=tradingbot.azurecr.io/backend:${{ github.sha }}
+          ui=tradingbot.azurecr.io/ui:${{ github.sha }}
 
   deploy:
     runs-on: ubuntu-latest
