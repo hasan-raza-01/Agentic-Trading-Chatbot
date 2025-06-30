@@ -58,7 +58,7 @@ jobs:
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_792cffb34645437494770d9ba8679a96 }}
         images: | 
-          tradingbot.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_94b6c4c9ad9c452da4f4cf5d841de90c }}/backend:${{ github.sha }}
-          tradingbot.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_94b6c4c9ad9c452da4f4cf5d841de90c }}/ui:${{ github.sha }}
+          'tradingbot.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_94b6c4c9ad9c452da4f4cf5d841de90c }}/backend:${{ github.sha }}'
+          'tradingbot.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_94b6c4c9ad9c452da4f4cf5d841de90c }}/ui:${{ github.sha }}'
 
 
