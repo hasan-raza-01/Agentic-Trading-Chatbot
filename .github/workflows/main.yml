@@ -32,7 +32,7 @@ jobs:
         context: .
         push: true
         tags: tradingbot.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_94b6c4c9ad9c452da4f4cf5d841de90c }}/backend:${{ github.sha }}
-        file: Dockerfile
+        file: Dockerfile.backend
 
     - name: Build and push ui image to registry
       uses: docker/build-push-action@v3
@@ -40,7 +40,7 @@ jobs:
         context: .
         push: true
         tags: tradingbot.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_94b6c4c9ad9c452da4f4cf5d841de90c }}/ui:${{ github.sha }}
-        file: Dockerfile
+        file: Dockerfile.streamlit
 
   deploy:
     runs-on: ubuntu-latest
