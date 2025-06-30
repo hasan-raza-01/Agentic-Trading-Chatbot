@@ -3,7 +3,7 @@ services:
     build:
       context: .
       file: Dockerfile.backend
-    image: tradingbot.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_94b6c4c9ad9c452da4f4cf5d841de90c }}/backend:latest
+    image: tradingbot.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_94b6c4c9ad9c452da4f4cf5d841de90c }}/backend:${{ github.sha }}
     ports:
       - "8000:8000"
     env_file:
@@ -19,7 +19,7 @@ services:
     build:
       context: . 
       file: Dockerfile.streamlit
-    image: tradingbot.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_94b6c4c9ad9c452da4f4cf5d841de90c }}/ui:latest
+    image: tradingbot.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_94b6c4c9ad9c452da4f4cf5d841de90c }}/ui:${{ github.sha }}
     ports:
       - "8501:8501"
     depends_on:
