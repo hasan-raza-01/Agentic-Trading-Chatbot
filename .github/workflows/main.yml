@@ -57,5 +57,5 @@ jobs:
         app-name: 'trading-chatbot'
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_792cffb34645437494770d9ba8679a96 }}
-        package: ./docker-compose.yml 
+        package: ./
 
