@@ -72,6 +72,7 @@ class ToolsComponents:
                 
                 # tavily
                 tavily_tool = TavilySearchResults(
+                tavily_api_key=os.getenv("TAVILY_API_KEY"),
                 max_results=self.__tools_config.TAVILY_MAX_RESULTS,
                 search_depth="advanced",
                 include_answer=True,

@@ -1,9 +1,9 @@
 import streamlit as st
 import requests
-from trading_bot.exception import CustomException
-import sys
+import os 
 
-BASE_URL = "http://localhost:8000"  # Backend endpoint
+
+BASE_URL = os.getenv("BACKEND_URL", "http://localhost:8000")
 
 st.set_page_config(
     page_title="📈 Stock Market Agentic Chatbot",
@@ -42,7 +42,7 @@ with st.sidebar:
                         else:
                             st.error("❌ Upload failed: " + response.text)
                 except Exception as e:
-                    raise CustomException(e, sys)
+                    raise e
             else:
                 st.warning("Some files were empty or unreadable.")
 
@@ -77,5 +77,5 @@ if submit_button and user_input.strip():
             st.error("❌ Bot failed to respond: " + response.text)
 
     except Exception as e:
-        raise CustomException(e, sys)
+        raise e
 

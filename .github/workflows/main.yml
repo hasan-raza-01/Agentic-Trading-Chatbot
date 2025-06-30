@@ -26,12 +26,21 @@ jobs:
         username: ${{ secrets.AzureAppService_ContainerUsername_94b6c4c9ad9c452da4f4cf5d841de90c }}
         password: ${{ secrets.AzureAppService_ContainerPassword_149de5f9e1a34dcb994fe1da62c9b36a }}
 
-    - name: Build and push container image to registry
+    - name: Build and push backend image to registry
       uses: docker/build-push-action@v3
       with:
+        context: .
         push: true
         tags: tradingbot.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_94b6c4c9ad9c452da4f4cf5d841de90c }}/backend:${{ github.sha }}
-        file: ./Dockerfile
+        file: Dockerfile
+
+    - name: Build and push ui image to registry
+      uses: docker/build-push-action@v3
+      with:
+        context: ./frontend
+        push: true
+        tags: tradingbot.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_94b6c4c9ad9c452da4f4cf5d841de90c }}/ui:${{ github.sha }}
+        file: Dockerfile
 
   deploy:
     runs-on: ubuntu-latest
@@ -48,4 +57,5 @@ jobs:
         app-name: 'trading-chatbot'
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_792cffb34645437494770d9ba8679a96 }}
-        images: 'tradingbot.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_94b6c4c9ad9c452da4f4cf5d841de90c }}/backend:${{ github.sha }}'
+        package: ./docker-compose.yml 
+

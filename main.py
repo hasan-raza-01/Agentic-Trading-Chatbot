@@ -18,6 +18,11 @@ app.add_middleware(
 
 data_ingestion_pipeline = DataIngestionPipeline()
 
+# health check 
+@app.get("/health", tags=["health"])
+async def health_check():
+    return {"status": "ok"}
+
 @app.post("/upload")
 async def upload_files(files: List[UploadFile] = File(...)):
     try:
