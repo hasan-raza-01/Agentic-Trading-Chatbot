@@ -1,12 +1,12 @@
 # Agentic-Trading-Chatbot
 
-### run fastapi application in port 8000
+### run fastapi backend 
 ```
-uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+uv run main.py
 ```
 
-### for running the streamlit ui
+### run streamlit ui for frontend 
 ```
-streamlit run frontend/app.py
+streamlit run app.py
 ```
 

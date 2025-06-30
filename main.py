@@ -1,3 +1,4 @@
+import uvicorn 
 from trading_bot.pipeline.data_ingestion_pipeline import DataIngestionPipeline 
 from trading_bot.pipeline.query_pipeline import QueryPipeline 
 from fastapi.middleware.cors import CORSMiddleware 
@@ -51,3 +52,7 @@ async def query_chatbot(request: QuestionRequest):
     except Exception as e:
         return JSONResponse(status_code=500, content={"error": str(e)})
     
+
+if __name__ == "__main__":
+    uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
+

@@ -1,6 +1,5 @@
 import streamlit as st
-import requests
-import os 
+import requests, os 
 
 
 BASE_URL = os.getenv("BACKEND_URL", "http://localhost:8000")
