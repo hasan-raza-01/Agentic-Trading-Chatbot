@@ -64,9 +64,9 @@ jobs:
       - name: Save image tags
         id: tags
         run: |
-          echo "::set-output name=IMG1::${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_REPOSITORY }}:backend-${{ github.sha }}"
-          echo "::set-output name=IMG2::${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_REPOSITORY }}:ui-${{ github.sha }}"
-
+          echo "IMG1=${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_REPOSITORY }}:backend-${{ github.sha }}" >> $GITHUB_OUTPUT
+          echo "IMG2=${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_REPOSITORY }}:ui-${{ github.sha }}" >> $GITHUB_OUTPUT
+  
   deploy:
     name: Continuous Deployment
     runs-on: self-hosted
