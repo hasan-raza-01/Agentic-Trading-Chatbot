@@ -51,6 +51,7 @@ jobs:
           docker images
           docker tag ${{ env.IMAGE_backend }} $IMAGE1
           docker tag ${{ env.IMAGE_ui }} $IMAGE2
+          docker images
           docker push $IMAGE1
           docker push $IMAGE2
         env:
