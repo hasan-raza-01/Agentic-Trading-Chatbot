@@ -75,7 +75,8 @@ jobs:
         run: |
             echo "IMAGE_backend=${{ needs.build_and_push.outputs.tags.IMG1 }}" > .env
             echo "IMAGE_ui=${{ needs.build_and_push.outputs.tags.IMG2 }}" >> .env
-            docker compose pull
+            docker pull $IMAGE_backend
+            docker pull $IMAGE_ui
             docker compose up -d
 
       - name: Clean previous images, containers and volumes
