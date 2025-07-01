@@ -44,7 +44,7 @@ jobs:
           docker buildx create --use
           IMAGE1=${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_REPOSITORY }}:backend-${{ github.sha }}
           IMAGE2=${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_REPOSITORY }}:ui-${{ github.sha }}
-          docker-compose build --no-cache 
+          docker compose build --no-cache 
           docker tag trading-bot-backend $IMAGE1
           docker tag trading-bot-ui $IMAGE2
           docker push $IMAGE1
