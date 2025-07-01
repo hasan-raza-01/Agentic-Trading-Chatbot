@@ -26,6 +26,9 @@ jobs:
   build_and_push:
     name: Build & Push Images
     runs-on: ubuntu-latest
+    env:
+      IMAGE_backend: backend
+      IMAGE_ui: ui
     steps:
       - uses: actions/checkout@v4
 
@@ -46,8 +49,8 @@ jobs:
           IMAGE2=${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_REPOSITORY }}:ui-${{ github.sha }}
           docker compose build --no-cache 
           docker images
-          docker tag trading-bot-backend $IMAGE1
-          docker tag trading-bot-ui $IMAGE2
+          docker tag backend $IMAGE1
+          docker tag ui $IMAGE2
           docker push $IMAGE1
           docker push $IMAGE2
         env:
