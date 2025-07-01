@@ -73,11 +73,16 @@ jobs:
 
       - name: Pull latest images and deploy
         run: |
-            echo "IMAGE_backend=${{ needs.build_and_push.outputs.tags.IMG1 }}" > .env
-            echo "IMAGE_ui=${{ needs.build_and_push.outputs.tags.IMG2 }}" >> .env
+            IMAGE_backend="${{ needs.build_and_push.outputs.tags.IMG1 }}"
+            IMAGE_ui="${{ needs.build_and_push.outputs.tags.IMG2 }}"
+            
+            echo "IMAGE_backend=$IMAGE_backend" > .env
+            echo "IMAGE_ui=$IMAGE_ui" >> .env
+
             docker pull $IMAGE_backend
             docker pull $IMAGE_ui
             docker compose up -d
+
 
       - name: Clean previous images, containers and volumes
         run: docker system prune -af
