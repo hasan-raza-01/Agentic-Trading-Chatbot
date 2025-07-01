@@ -77,7 +77,9 @@ jobs:
         uses: aws-actions/amazon-ecr-login@v2
 
       - name: Clean previous images, containers and volumes
-        run: docker system prune -af
+        run: | 
+            docker compose down
+            docker system prune -af
 
       - name: Pull latest images and deploy
         run: |
