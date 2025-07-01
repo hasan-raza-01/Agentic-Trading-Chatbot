@@ -3,7 +3,10 @@ name: Github CI-CD Pipeline
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main
+    paths-ignore:
+      - 'README.md'
 
 env:
   AWS_REGION: us-east-1

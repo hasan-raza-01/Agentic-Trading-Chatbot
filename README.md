@@ -50,7 +50,6 @@ An end-to-end, agentic Retrieval-Augmented Generation (RAG) system designed to d
   Manage secrets and endpoints via a `.env` file:
 
   ```bash
-  BACKEND_URL=http://localhost:8000
   POLYGON_API_KEY=your_polygon_key
   TAVILY_TOKEN=your_tavily_token
   PINECONE_API_KEY=your_pinecone_key
