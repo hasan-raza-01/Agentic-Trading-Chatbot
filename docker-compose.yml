@@ -2,7 +2,7 @@ services:
   backend:
     build:
       context: .
-      file: Dockerfile.backend
+      dockerfile: Dockerfile.backend
     image: "${IMAGE_backend}"
     ports:
       - "8000:8000"
@@ -18,7 +18,7 @@ services:
   ui:
     build:
       context: . 
-      file: Dockerfile.streamlit
+      dockerfile: Dockerfile.streamlit
     image: "${IMAGE_ui}"
     ports:
       - "8501:8501"
