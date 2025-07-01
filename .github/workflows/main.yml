@@ -47,8 +47,8 @@ jobs:
           docker buildx create --use
           IMAGE1=${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_REPOSITORY }}:backend-${{ github.sha }}
           IMAGE2=${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_REPOSITORY }}:ui-${{ github.sha }}
-          echo "IMAGE1"
-          echo "IMAGE2"
+          echo "$IMAGE1"
+          echo "$IMAGE2"
           docker compose build --no-cache 
           docker images
           docker tag ${{ env.IMAGE_backend }} $IMAGE1
