@@ -84,6 +84,11 @@ jobs:
             echo "Backend image: $IMAGE_backend"
             echo "UI image:      $IMAGE_ui"
 
+            if [[ -z "$IMAGE_backend" || -z "$IMAGE_ui" ]]; then
+              echo "❌ One or both image URIs are empty. Failing deployment."
+              exit 1
+            fi
+
             echo "IMAGE_backend=$IMAGE_backend" > .env
             echo "IMAGE_ui=$IMAGE_ui"     >> .env
 
