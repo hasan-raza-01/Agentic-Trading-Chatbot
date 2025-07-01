@@ -4,6 +4,11 @@ An end-to-end, agentic Retrieval-Augmented Generation (RAG) system designed to d
 
 ---
 
+## Here’s a preview of the app’s user interface:
+![UI Screenshot](./screenshots/ui-preview.png)
+
+---
+
 ## 🔧 Core Workflow
 
 1. **Document Ingestion & Processing**
