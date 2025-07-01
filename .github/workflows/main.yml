@@ -76,12 +76,14 @@ jobs:
 
       - name: Pull latest images and deploy
         run: |
+            echo "DEBUG OUTPUTS: ${{ toJSON(needs.build_and_push.outputs) }}"
+
             IMAGE_backend="${{ needs.build_and_push.outputs.IMG1 }}"
             IMAGE_ui="${{ needs.build_and_push.outputs.IMG2 }}"
 
             echo "Backend image: $IMAGE_backend"
             echo "UI image:      $IMAGE_ui"
-            
+
             echo "IMAGE_backend=$IMAGE_backend" > .env
             echo "IMAGE_ui=$IMAGE_ui"     >> .env
 
