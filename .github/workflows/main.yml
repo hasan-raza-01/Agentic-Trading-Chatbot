@@ -73,8 +73,8 @@ jobs:
 
       - name: Pull latest images and deploy
         run: |
-            IMAGE_backend="${{ needs.build_and_push.outputs.tags.IMG1 }}"
-            IMAGE_ui="${{ needs.build_and_push.outputs.tags.IMG2 }}"
+            IMAGE_backend="${{ needs.build_and_push.outputs.IMG1 }}"
+            IMAGE_ui="${{ needs.build_and_push.outputs.IMG2 }}"
             
             echo "IMAGE_backend=$IMAGE_backend" > .env
             echo "IMAGE_ui=$IMAGE_ui" >> .env
