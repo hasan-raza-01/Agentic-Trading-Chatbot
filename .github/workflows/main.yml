@@ -1,0 +1,79 @@
+# .github/workflows/deploy-compose-to-ec2.yml
+name: Github CI-CD Pipeline
+
+on:
+  push:
+    branches: [ main ]
+
+env:
+  AWS_REGION: us-east-1
+  ECR_REPOSITORY: trading-bot
+
+jobs:
+  integration:
+    name: Continuous Integration
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Lint code
+        run: echo "Linting repository"
+
+      - name: Run unit tests
+        run: echo "Running unit tests"
+
+  build_and_push:
+    name: Build & Push Images
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: aws-actions/configure-aws-credentials@v2
+        with:
+            aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+            aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+            aws-region: ${{ env.AWS_REGION }}
+
+
+      - name: Log in to ECR
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Build & Push via Docker Compose
+        run: |
+          docker buildx create --use
+          IMAGE1=${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_REPOSITORY }}:backend-${{ github.sha }}
+          IMAGE2=${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_REPOSITORY }}:ui-${{ github.sha }}
+          docker-compose build --no-cache 
+          docker tag trading-bot-backend $IMAGE1
+          docker tag trading-bot-ui $IMAGE2
+          docker push $IMAGE1
+          docker push $IMAGE2
+        env:
+          DOCKER_BUILDKIT: 1
+
+      - name: Save image tags
+        id: tags
+        run: |
+          echo "::set-output name=IMG1::${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_REPOSITORY }}:backend-${{ github.sha }}"
+          echo "::set-output name=IMG2::${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_REPOSITORY }}:ui-${{ github.sha }}"
+
+  deploy:
+    name: Continuous Deployment
+    runs-on: self-hosted
+    needs: build_and_push
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Pull latest images and deploy
+        run: |
+            echo "IMAGE_backend=${{ needs.build_and_push.outputs.tags.IMG1 }}" > .env
+            echo "IMAGE_ui=${{ needs.build_and_push.outputs.tags.IMG2 }}" >> .env
+            docker compose pull
+            docker compose up -d
+
+      - name: Clean previous images, containers and volumes
+        run: docker system prune -af
+
