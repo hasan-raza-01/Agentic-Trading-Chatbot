@@ -9,6 +9,28 @@ An end-to-end, agentic Retrieval-Augmented Generation (RAG) system designed to d
 
 ---
 
+## 📂 Repository Structure
+
+```
+├── src/
+│   └── trading_bot/
+│       ├── pipeline/
+│       │   ├── data_ingestion_pipeline.py
+│       │   └── query_pipeline.py
+│       ├── agents/           # Custom LangChain agents for trading
+│       ├── schema.py         # Pydantic models (e.g., QuestionRequest)
+│       └── utils/            # Helpers: PDF parsing, API clients
+├── notebooks/                # Exploratory analysis and demos
+├── Dockerfile.backend        # Backend Dockerfile (FastAPI + agents)
+├── Dockerfile.streamlit      # UI Dockerfile (Streamlit frontend)
+├── docker-compose.yml        # Dev orchestration
+├── requirements.txt          # Python dependencies
+├── setup.py                  # Package configuration
+└── .github/workflows/main.yml  # CI/CD pipeline
+```
+
+---
+
 ## 🔧 Core Workflow
 
 1. **Document Ingestion & Processing**
@@ -107,25 +129,3 @@ An end-to-end, agentic Retrieval-Augmented Generation (RAG) system designed to d
    ```bash
    docker-compose up --build
    ```
-
----
-
-## 📂 Repository Structure
-
-```
-├── src/
-│   └── trading_bot/
-│       ├── pipeline/
-│       │   ├── data_ingestion_pipeline.py
-│       │   └── query_pipeline.py
-│       ├── agents/           # Custom LangChain agents for trading
-│       ├── schema.py         # Pydantic models (e.g., QuestionRequest)
-│       └── utils/            # Helpers: PDF parsing, API clients
-├── notebooks/                # Exploratory analysis and demos
-├── Dockerfile.backend        # Backend Dockerfile (FastAPI + agents)
-├── Dockerfile.streamlit      # UI Dockerfile (Streamlit frontend)
-├── docker-compose.yml        # Dev orchestration
-├── requirements.txt          # Python dependencies
-├── setup.py                  # Package configuration
-└── .github/workflows/main.yml  # CI/CD pipeline
-```
