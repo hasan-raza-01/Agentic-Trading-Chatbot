@@ -12,21 +12,52 @@ An end-to-end, agentic Retrieval-Augmented Generation (RAG) system designed to d
 ## 📂 Repository Structure
 
 ```
+.
+├── .dockerignore
+├── .gitignore
+├── .python-version
+├── Dockerfile.backend        # Dockerfile for building the FastAPI backend
+├── Dockerfile.streamlit      # Dockerfile for building the Streamlit frontend
+├── ProjectConfig.json        # Project-specific configuration settings
+├── README.md                 # Project documentation and usage guide
+├── app.py                    # Entry point for the Streamlit Frontend Application
+├── config/                   # Directory for configuration files
+├── docker-compose.yml        # Docker Compose file for orchestrating backend and ui services
+├── main.py                   # Entry point for the FastAPI Backend Application
+├── notebook/                 # Jupyter notebooks for exploration and testing
+├── requirements.txt          # List of Python dependencies
+├── screenshots/              # Directory for storing images used in README
+│   └── ui-preview.png        # Screenshot of the user interface
+├── setup.py                  # Script for installing the project as a package
 ├── src/
-│   └── trading_bot/
-│       ├── pipeline/
-│       │   ├── data_ingestion_pipeline.py
-│       │   └── query_pipeline.py
-│       ├── agents/           # Custom LangChain agents for trading
-│       ├── schema.py         # Pydantic models (e.g., QuestionRequest)
-│       └── utils/            # Helpers: PDF parsing, API clients
-├── notebooks/                # Exploratory analysis and demos
-├── Dockerfile.backend        # Backend Dockerfile (FastAPI + agents)
-├── Dockerfile.streamlit      # UI Dockerfile (Streamlit frontend)
-├── docker-compose.yml        # Dev orchestration
-├── requirements.txt          # Python dependencies
-├── setup.py                  # Package configuration
-└── .github/workflows/main.yml  # CI/CD pipeline
+│   └── trading_bot/          # Main package directory
+│       ├── __init__.py
+│       ├── components/       # Core business logic and components
+│       │   ├── __init__.py
+│       │   ├── agents.py     # Definitions of LangChain agents and workflow graph
+│       │   ├── data_ingestion.py # Logic for parsing and processing uploaded documents
+│       │   └── tools.py      # Implementations of tools (Tavily, Polygon, Retriever)
+│       ├── configuration/    # Configuration management classes
+│       │   └── __init__.py
+│       ├── constants/        # Project-wide constants
+│       │   └── __init__.py
+│       ├── entity/           # Data entity definitions
+│       │   └── __init__.py
+│       ├── exception/        # Custom exception handling logic
+│       │   └── __init__.py
+│       ├── logger/           # Logging configuration and setup
+│       │   └── __init__.py
+│       ├── pipeline/         # High-level orchestration pipelines
+│       │   ├── __init__.py
+│       │   ├── data_ingestion_pipeline/ # Pipeline for handling document ingestion
+│       │   │   └── __init__.py
+│       │   └── query_pipeline/          # Pipeline for handling user queries and RAG
+│       │       └── __init__.py
+│       ├── schema/           # Pydantic models for request/response and state schemas
+│       │   └── __init__.py
+│       └── utils/            # Helper functions (I/O, Model loading, etc.)
+│           └── __init__.py
+└── uv.lock                   # Lock file for ensuring reproducible dependency installs
 ```
 
 ---
