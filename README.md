@@ -9,6 +9,14 @@ An end-to-end, agentic Retrieval-Augmented Generation (RAG) system designed to d
 
 ---
 
+## 📊 Project Workflow
+
+![Project Workflow](./screenshots/workflow.png)
+
+*Complete end-to-end pipeline from data ingestion to deployment*
+
+---
+
 ## 📂 Repository Structure
 
 ```
